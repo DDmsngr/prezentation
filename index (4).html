@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>МедиаПро — Медиа, Социальные сети и Аналитика</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* GT Walsheim Pro – используется на оригинальном Meltwater. При наличии установленного шрифта – он применится автоматически. Fallback: Inter */
+@font-face{font-family:"GT Walsheim Pro";font-style:normal;font-weight:400;font-display:swap;src:local("GT Walsheim Pro")}
+@font-face{font-family:"GT Walsheim Pro";font-style:normal;font-weight:500;font-display:swap;src:local("GT Walsheim Pro")}
+@font-face{font-family:"GT Walsheim Pro";font-style:normal;font-weight:700;font-display:swap;src:local("GT Walsheim Pro")}
+</style>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'GT Walsheim Pro','Inter',sans-serif;color:#202020;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.5}
+a{text-decoration:none;color:inherit}ul{list-style:none}
+
+/* HEADER */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-bottom:1px solid #e5e7eb}
+.hwrap{max-width:1440px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:16px}
+.logo{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800;letter-spacing:-0.5px;color:#111;flex-shrink:0}
+.logo-d{display:flex;align-items:center;gap:3px}
+.d1{width:10px;height:10px;transform:rotate(45deg);background:#111}
+.d2{width:10px;height:10px;transform:rotate(45deg);background:none;border:1.5px solid #111}
+.d3{width:8px;height:8px;transform:rotate(45deg);background:#28bbbb}
+
+/* nav */
+.cnav{height:100%}.cnav>ul{display:flex;align-items:center;height:100%}
+.ni{position:relative;height:100%;display:flex;align-items:center}
+.ni>span,.ni>a{display:flex;align-items:center;gap:5px;padding:0 14px;height:100%;font-size:14px;font-weight:500;color:#444;cursor:pointer;transition:color .15s;white-space:nowrap;user-select:none}
+.ni>span:hover,.ni>a:hover{color:#111}
+.chv{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .2s;margin-top:-2px;flex-shrink:0}
+.ni:hover>.ns .chv{transform:rotate(-135deg);margin-top:2px}
+
+/* dropdown */
+.dd{position:absolute;top:calc(100% + 1px);left:50%;transform:translateX(-50%) translateY(8px);background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 16px 48px rgba(0,0,0,0.1),0 4px 12px rgba(0,0,0,0.05);padding:20px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .16s,visibility .16s,transform .16s;z-index:200}
+.ni:hover .dd{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.ddl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;padding:0 8px;margin-bottom:10px}
+.ddg{display:grid;grid-template-columns:1fr 1fr;gap:2px;min-width:480px}
+.ddr{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:9px;cursor:pointer;transition:background .12s}
+.ddr:hover{background:#f5f5f5}
+.ddi{width:34px;height:34px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ddn{font-size:13px;font-weight:600;color:#111;margin-bottom:2px}
+.dds{font-size:11px;color:#888;line-height:1.4}
+
+/* right nav */
+.rnav{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.rl{font-size:14px;font-weight:500;color:#444;padding:8px 12px;transition:color .15s;white-space:nowrap}
+.rl:hover{color:#111}
+.rdemo{display:inline-flex;align-items:center;gap:8px;background:#00c896;color:#000;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;transition:background .2s;white-space:nowrap;margin-left:4px}
+.rdemo:hover{background:#00b080}
+.dc{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:10px}
+
+/* HERO */
+.hero{padding-top:68px;min-height:100vh;display:flex;align-items:center}
+.hi{max-width:1440px;margin:0 auto;padding:60px 40px;display:grid;grid-template-columns:5fr 7fr;gap:40px;align-items:center;width:100%}
+.hh1{font-size:clamp(36px,4.2vw,58px);font-weight:600;line-height:1.45;color:#111;margin-bottom:36px;letter-spacing:-0.02em}
+.hswap{color:#28bbbb;transition:opacity .3s,filter .3s;display:inline-block}
+.hcta{display:inline-flex;align-items:center;gap:12px;background:#111;color:#fff;padding:14px 28px;border-radius:50px;font-size:15px;font-weight:600;transition:all .2s;cursor:pointer}
+.hcta:hover{background:#333;transform:translateY(-2px)}
+.hcc{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:10px}
+.hr{display:flex;flex-direction:column;align-items:flex-end}
+.pdots{display:flex;gap:6px;margin-bottom:20px}
+.pd{width:10px;height:10px;border-radius:50%;background:#ddd;cursor:pointer;transition:background .2s}
+.pd.on{background:#111}
+.hvis{width:100%;aspect-ratio:1.25/1;border-radius:12px;overflow:hidden;background:#fafafa}
+
+/* LOGO STRIP */
+.lstrip{border-top:1px solid #e5e7eb;overflow:hidden}
+.ltrack{display:flex;align-items:center;gap:64px;animation:sl 24s linear infinite;width:max-content;padding:28px 40px}
+.ltrack:hover{animation-play-state:paused}
+@keyframes sl{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.li{font-size:15px;font-weight:700;color:#ccc;white-space:nowrap;letter-spacing:-0.3px;transition:color .2s}
+.li:hover{color:#888}
+
+/* CAROUSEL */
+.cars{padding:80px 0}
+.cari{max-width:1440px;margin:0 auto;padding:0 40px}
+.carh{font-size:clamp(26px,3vw,38px);font-weight:600;color:#111;text-align:center;margin-bottom:52px;letter-spacing:-0.02em}
+.carb{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.cart h2{font-size:20px;font-weight:600;color:#111;margin-bottom:10px}
+.cart p{font-size:15px;color:#555;line-height:1.7;margin-bottom:24px}
+.stbox{position:relative;width:100%;max-width:500px;margin:0 auto;height:320px}
+.stf{position:absolute;inset:0;border-radius:14px;background:#f7f7f7;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px;text-align:center;opacity:0;transition:opacity .5s;pointer-events:none}
+.stf.vis{opacity:1;pointer-events:all}
+.stn{font-size:54px;font-weight:700;letter-spacing:-2px;line-height:1;margin-bottom:8px}
+.stp{font-size:14px;color:#555;line-height:1.4;max-width:200px}
+.stg{width:150px;height:75px;margin-bottom:16px}
+.sdts{display:flex;gap:7px;justify-content:center;margin-top:18px}
+.sdt{width:8px;height:8px;border-radius:50%;background:#ddd;cursor:pointer;transition:background .2s}
+.sdt.on{background:#111}
+
+/* AI DARK SECTION */
+.aisec{padding:64px 40px}
+.aii{max-width:1280px;margin:0 auto}
+.aicard{background:#222222;border-radius:40px;padding:60px;position:relative;overflow:hidden;color:#fff}
+.aig{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+.aitag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#777;margin-bottom:20px}
+.aihed{font-size:clamp(26px,3.2vw,44px);font-weight:400;letter-spacing:-0.02em;line-height:1.3;background:linear-gradient(to right,#b627a1,#28bbbb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:24px;filter:brightness(1.2);display:inline-block}
+.aidesc{font-size:16px;color:rgba(255,255,255,0.7);line-height:1.7;max-width:440px;margin-bottom:32px}
+.aibtn{display:inline-flex;align-items:center;gap:12px;background:#000;color:#fff;padding:14px 28px;border-radius:50px;font-size:14px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;transition:background .2s;cursor:pointer;border:none}
+.aibtn:hover{background:#1a1a1a}
+/* pills */
+.pbg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:0}
+.ppos{position:absolute;top:50%;left:72%;transform:translate(-50%,-50%)}
+.pcont{transform:rotate(-45deg);width:1540px;height:480px}
+.pl{position:absolute;width:500px;height:150px;border:2px solid rgba(255,255,255,0.05);border-radius:75px;animation:ps 4s ease-in-out infinite}
+@keyframes ps{0%,100%{border-color:rgba(255,255,255,0.05)}50%{border-color:rgba(255,255,255,0.2)}}
+.pl:nth-child(1){top:0;left:0;animation-delay:0s}.pl:nth-child(2){top:0;left:510px;animation-delay:1.2s}.pl:nth-child(3){top:0;left:1020px;animation-delay:2.4s}.pl:nth-child(4){top:160px;left:255px;animation-delay:.6s}.pl:nth-child(5){top:160px;left:765px;animation-delay:1.8s}.pl:nth-child(6){top:160px;left:1275px;animation-delay:3s}.pl:nth-child(7){top:320px;left:0;animation-delay:0s}.pl:nth-child(8){top:320px;left:510px;animation-delay:1.2s}.pl:nth-child(9){top:320px;left:1020px;animation-delay:2.4s}
+/* mockup */
+.mk{background:#fff;border-radius:14px;box-shadow:0 24px 64px rgba(0,0,0,0.4);overflow:hidden}
+.mktop{background:#fafafa;border-bottom:1px solid #e5e7eb;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.mktrf{display:flex;gap:5px}
+.mkd{width:10px;height:10px;border-radius:50%}
+.mkd.r{background:#ff5f57}.mkd.y{background:#ffbd2e}.mkd.g{background:#28c840}
+.mktc{flex:1;text-align:center;font-size:12px;font-weight:600;color:#111;display:flex;align-items:center;justify-content:center;gap:6px}
+.mklsm{width:18px;height:12px;background:linear-gradient(135deg,#b627a1,#28bbbb);border-radius:3px}
+.mkbody{display:flex;height:270px}
+.mksb{width:40px;background:#f8f8f8;border-right:1px solid #e5e7eb;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:10px}
+.sbic{width:18px;height:18px;border-radius:4px;background:#e0e0e0}.sbic.a{background:#111}
+.mkcnt{flex:1;padding:14px;overflow:hidden}
+.mkbc{display:flex;align-items:center;gap:5px;font-size:10px;color:#999;margin-bottom:10px}
+.mkbc strong{color:#111;font-size:11px}
+.mkbr{display:flex;justify-content:flex-end;gap:5px;margin-bottom:10px}
+.mbsm{font-size:9px;padding:3px 8px;border-radius:4px;border:1px solid #e5e7eb;background:#fff;color:#666}
+.cmsg{margin-bottom:9px}
+.curow{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.cav{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex-shrink:0}
+.cav.u{background:#6366f1}.cav.ai{background:linear-gradient(135deg,#b627a1,#28bbbb)}
+.cnm{font-size:10px;font-weight:600;color:#111}
+.ctx{font-size:10px;color:#555;margin-left:26px;line-height:1.4}
+.cres{background:#f5f5f5;border-radius:7px;padding:8px 10px;margin-left:26px;margin-top:5px}
+.crt{font-size:10px;font-weight:700;color:#111}
+.cbdg{display:inline-flex;align-items:center;background:#e8fdf5;color:#00a878;font-size:8px;font-weight:600;padding:2px 6px;border-radius:50px;margin-top:3px}
+.ctabs{display:flex;gap:8px;margin-top:4px}
+.ctab{font-size:9px;font-weight:600;color:#999;padding-bottom:2px;border-bottom:1.5px solid transparent}
+.ctab.on{color:#111;border-color:#111}
+.csrc{display:flex;align-items:center;gap:5px;margin-top:5px;padding-top:4px;border-top:1px solid #e5e7eb}
+.csri{font-size:8px;color:#888}
+.csri strong{color:#111;font-weight:600;display:block}
+.csinp{display:flex;align-items:center;gap:6px;border:1px solid #e5e7eb;border-radius:6px;padding:6px 9px;margin-top:6px;font-size:10px;color:#bbb}
+.cssend{margin-left:auto;width:20px;height:20px;border-radius:50%;background:#e0e0e0;display:flex;align-items:center;justify-content:center;font-size:9px}
+
+/* SUITE */
+.stsec{padding:80px 40px}
+.sti{max-width:1440px;margin:0 auto}
+.sth{margin-bottom:44px}
+.sth h2{font-size:clamp(26px,3vw,38px);font-weight:600;letter-spacing:-0.02em;color:#111;margin-bottom:14px;line-height:1.15}
+.stail{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:#28bbbb}
+.stail::after{content:'→';transition:transform .2s}
+.stail:hover::after{transform:translateX(4px)}
+.stgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+.stitem{padding:28px 22px;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;cursor:pointer;transition:background .15s}
+.stitem:hover{background:#fafafa}
+.stitem:nth-child(4n){border-right:none}
+.stitem:nth-child(n+5){border-bottom:none}
+.stico{height:40px;margin-bottom:14px;display:flex;align-items:center}
+.stitem h3{font-size:15px;font-weight:600;color:#111;margin-bottom:4px}
+.stitem p{font-size:13px;color:#888}
+.stlrn{display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:12px;font-weight:600;color:#28bbbb}
+.stlrn::after{content:'→';font-size:11px;transition:transform .2s}
+.stitem:hover .stlrn::after{transform:translateX(3px)}
+
+/* TESTIMONIALS */
+.tsec{background:#f7f7f7;padding:80px 40px}
+.ti{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:60px}
+.tinfo h2{font-size:clamp(24px,3vw,36px);font-weight:600;color:#111;letter-spacing:-0.02em;margin-bottom:16px;line-height:1.2}
+.tinfo p{font-size:15px;color:#555;line-height:1.7;margin-bottom:28px}
+.tcta{display:inline-flex;align-items:center;gap:10px;background:#111;color:#fff;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:600;transition:background .2s}
+.tcta:hover{background:#333}
+.tctac{width:17px;height:17px;border-radius:50%;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:9px}
+.tcols{display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:hidden;height:420px;position:relative}
+.tcols::before,.tcols::after{content:'';position:absolute;left:0;right:0;z-index:2;height:80px;pointer-events:none}
+.tcols::before{top:0;background:linear-gradient(to bottom,#f7f7f7,transparent)}
+.tcols::after{bottom:0;background:linear-gradient(to top,#f7f7f7,transparent)}
+.tcol{display:flex;flex-direction:column;gap:12px}
+.tcoli{display:flex;flex-direction:column;gap:12px;animation:tk 28s linear infinite}
+.tcol:nth-child(2) .tcoli{animation-direction:reverse;animation-duration:36s}
+@keyframes tk{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+.tcard{background:#fff;border-radius:12px;padding:20px;border:1px solid #e5e7eb}
+.tclogo{height:30px;margin-bottom:12px;display:flex;align-items:center}
+.tclogo span{font-size:14px;font-weight:800;color:#111;letter-spacing:-0.3px}
+.tcard p{font-size:13px;color:#444;line-height:1.6;margin-bottom:10px}
+.tcauth{font-size:12px;color:#888}
+.tcauth strong{color:#111;font-weight:600;display:block}
+.tbl{border-radius:12px;min-height:110px;display:flex;align-items:center;justify-content:center}
+.tbl span{font-size:18px;font-weight:700;color:#fff}
+
+/* PRODUCT CTA */
+.pcsec{padding:80px 40px;background:#fff}
+.pci{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.pcinfo h2{font-size:clamp(24px,3vw,40px);font-weight:600;color:#111;letter-spacing:-0.02em;margin-bottom:16px;line-height:1.2}
+.pcinfo p{font-size:15px;color:#555;line-height:1.7;margin-bottom:32px}
+.btnrow{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.bdark{display:inline-flex;align-items:center;gap:10px;background:#111;color:#fff;padding:13px 26px;border-radius:50px;font-size:14px;font-weight:600;transition:all .2s}
+.bdark:hover{background:#333;transform:translateY(-1px)}
+.bdc{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:8px}
+.bsec{display:inline-flex;align-items:center;gap:7px;color:#111;font-size:14px;font-weight:500;padding:13px 0;border-bottom:1.5px solid #111;transition:gap .2s}
+.bsec:hover{gap:12px}
+.lpvis{display:flex;align-items:center;justify-content:center}
+
+/* ABOUT META */
+.absec{padding:80px 40px;background:#fff}
+.abi{max-width:1440px;margin:0 auto}
+.abh2{font-size:clamp(24px,3vw,36px);font-weight:600;color:#111;letter-spacing:-0.02em;text-align:center;margin-bottom:44px}
+.abgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.abcard{border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;cursor:pointer;transition:box-shadow .2s}
+.abcard:hover{box-shadow:0 8px 30px rgba(0,0,0,0.08)}
+.abvis{height:160px;display:flex;align-items:center;justify-content:center;font-size:52px}
+.abinfo{padding:18px 22px}
+.abinfo h3{font-size:16px;font-weight:600;color:#111;margin-bottom:4px}
+.abinfo h4{font-size:13px;color:#888;font-weight:400}
+.abarr{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;border:1.5px solid #111;margin:0 22px 18px;font-size:11px;transition:all .2s}
+.abcard:hover .abarr{background:#111;color:#fff}
+
+/* FOOTER */
+.ftr{background:#fff;border-top:1px solid #e5e7eb;padding:56px 40px 28px}
+.ftri{max-width:1440px;margin:0 auto}
+.ftrgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:48px}
+.fcol h3{font-size:11px;font-weight:700;letter-spacing:.5px;color:#111;margin-bottom:14px;text-transform:uppercase}
+.fcol a{display:block;font-size:13px;color:#666;margin-bottom:9px;transition:color .15s}
+.fcol a:hover{color:#111}
+.fsp{height:20px}
+.flogo{font-size:16px;font-weight:800;color:#111;letter-spacing:-.5px;margin-bottom:8px}
+.fcpy{font-size:12px;color:#aaa}
+.fbot{border-top:1px solid #e5e7eb;padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbot a{font-size:12px;color:#999;margin-right:18px;transition:color .15s}
+.fbot a:hover{color:#111}
+.fsoc{display:flex;gap:10px}
+.fsc{width:30px;height:30px;border-radius:50%;border:1px solid #e5e7eb;display:flex;align-items:center;justify-content:center;font-size:11px;color:#777;transition:all .15s;cursor:pointer}
+.fsc:hover{background:#111;color:#fff;border-color:#111}
+
+@media(max-width:1100px){.stgrid{grid-template-columns:repeat(2,1fr)}.stitem:nth-child(4n){border-right:1px solid #e5e7eb}.stitem:nth-child(2n){border-right:none}}
+@media(max-width:900px){.hi{grid-template-columns:1fr}.hr{display:none}.aig{grid-template-columns:1fr}.carb{grid-template-columns:1fr}.ti{grid-template-columns:1fr}.pci{grid-template-columns:1fr}.abgrid{grid-template-columns:1fr}.ftrgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.cnav{display:none}.hwrap{padding:0 20px}.aicard{padding:32px 24px;border-radius:24px}.stgrid{grid-template-columns:1fr}.stitem{border-right:none!important}.tcols{grid-template-columns:1fr}.aisec,.stsec,.tsec,.pcsec,.absec,.ftr{padding-left:20px;padding-right:20px}.hi{padding:60px 20px}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hwrap">
+    <div class="logo">
+      <div class="logo-d"><div class="d1"></div><div class="d2"></div><div class="d3"></div></div>
+      МедиаПро
+    </div>
+    <nav class="cnav"><ul>
+      <li class="ni">
+        <span class="ns">Услуги <i class="chv"></i></span>
+        <div class="dd">
+          <div class="ddl">Что я делаю</div>
+          <div class="ddg">
+            <div class="ddr"><div class="ddi">📡</div><div><div class="ddn">Мониторинг медиа</div><div class="dds">Отслеживаю упоминания бренда</div></div></div>
+            <div class="ddr"><div class="ddi">📊</div><div><div class="ddn">Соцсети и аналитика</div><div class="dds">Изучаю инсайты и тренды</div></div></div>
+            <div class="ddr"><div class="ddi">🤖</div><div><div class="ddn">AI-видимость бренда</div><div class="dds">Как ИИ видит ваш бренд</div></div></div>
+            <div class="ddr"><div class="ddi">📰</div><div><div class="ddn">Медиарилейшнз</div><div class="dds">Выхожу на журналистов</div></div></div>
+            <div class="ddr"><div class="ddi">👥</div><div><div class="ddn">Потребительская аналитика</div><div class="dds">Понимаю вашу аудиторию</div></div></div>
+            <div class="ddr"><div class="ddi">⭐</div><div><div class="ddn">Инфлюенс-маркетинг</div><div class="dds">Расширяю охват</div></div></div>
+            <div class="ddr"><div class="ddi">💼</div><div><div class="ddn">Бизнес-разведка</div><div class="dds">Конкурентный анализ</div></div></div>
+            <div class="ddr"><div class="ddi">🔗</div><div><div class="ddn">Интеграция данных</div><div class="dds">API и выгрузки</div></div></div>
+          </div>
+        </div>
+      </li>
+      <li class="ni">
+        <span class="ns">По задаче <i class="chv"></i></span>
+        <div class="dd">
+          <div class="ddl">Кому помогаю</div>
+          <div class="ddg">
+            <div class="ddr"><div class="ddi">📣</div><div><div class="ddn">Маркетинг</div><div class="dds">Стратегия и продвижение</div></div></div>
+            <div class="ddr"><div class="ddi">🗞️</div><div><div class="ddn">PR и Коммуникации</div><div class="dds">Репутация бренда</div></div></div>
+            <div class="ddr"><div class="ddi">🔬</div><div><div class="ddn">Исследования</div><div class="dds">Рынок и потребители</div></div></div>
+            <div class="ddr"><div class="ddi">🏢</div><div><div class="ddn">C-Suite / Директора</div><div class="dds">Стратегические инсайты</div></div></div>
+          </div>
+        </div>
+      </li>
+      <li class="ni">
+        <span class="ns">Ресурсы <i class="chv"></i></span>
+        <div class="dd">
+          <div class="ddl">Полезное</div>
+          <div class="ddg">
+            <div class="ddr"><div class="ddi">📖</div><div><div class="ddn">Блог</div><div class="dds">Статьи и советы</div></div></div>
+            <div class="ddr"><div class="ddi">📑</div><div><div class="ddn">Гайды и отчёты</div><div class="dds">Бесплатные материалы</div></div></div>
+            <div class="ddr"><div class="ddi">🎙️</div><div><div class="ddn">Вебинары</div><div class="dds">Онлайн-обучение</div></div></div>
+            <div class="ddr"><div class="ddi">🛠️</div><div><div class="ddn">Кейсы клиентов</div><div class="dds">Истории успеха</div></div></div>
+          </div>
+        </div>
+      </li>
+      <li class="ni"><a href="#tsec">Клиенты</a></li>
+      <li class="ni">
+        <span class="ns">О себе <i class="chv"></i></span>
+        <div class="dd" style="min-width:340px">
+          <div class="ddl">Информация</div>
+          <div class="ddg" style="min-width:300px">
+            <div class="ddr"><div class="ddi">🙋</div><div><div class="ddn">Кто я</div><div class="dds">Опыт и подход</div></div></div>
+            <div class="ddr"><div class="ddi">✅</div><div><div class="ddn">Профи.ру</div><div class="dds">Рейтинг и отзывы</div></div></div>
+          </div>
+        </div>
+      </li>
+    </ul></nav>
+    <nav class="rnav">
+      <a href="https://profi.ru" target="_blank" class="rl">Войти</a>
+      <a href="#pricing" class="rl">Тарифы</a>
+      <a href="#contact" class="rdemo">Заказать консультацию <div class="dc">↗</div></a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hi">
+    <div>
+      <h1 class="hh1">Глубокая видимость вашего<br><span class="hswap" id="hw">бренда</span><span style="color:#111">.</span></h1>
+      <a href="#contact" class="hcta"><span class="hcc">→</span>Запросить консультацию</a>
+    </div>
+    <div class="hr">
+      <div class="pdots"><div class="pd"></div><div class="pd"></div><div class="pd"></div><div class="pd on"></div></div>
+      <div class="hvis">
+        <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <defs><linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#28bbbb;stop-opacity:0.12"/><stop offset="100%" style="stop-color:#b627a1;stop-opacity:0.06"/></linearGradient></defs>
+          <rect width="600" height="480" fill="url(#hg)"/>
+          <rect x="55" y="310" width="42" height="90" rx="4" fill="#28bbbb" opacity="0.3"/>
+          <rect x="110" y="270" width="42" height="130" rx="4" fill="#28bbbb" opacity="0.5"/>
+          <rect x="165" y="230" width="42" height="170" rx="4" fill="#28bbbb" opacity="0.7"/>
+          <rect x="220" y="185" width="42" height="215" rx="4" fill="#28bbbb" opacity="0.95"/>
+          <rect x="275" y="200" width="42" height="200" rx="4" fill="#b627a1" opacity="0.5"/>
+          <rect x="330" y="165" width="42" height="235" rx="4" fill="#b627a1" opacity="0.7"/>
+          <polyline points="55,280 110,235 165,195 220,155 275,145 330,132 390,115 450,95" fill="none" stroke="#28bbbb" stroke-width="2.5" opacity="0.7"/>
+          <circle cx="450" cy="95" r="5" fill="#28bbbb"/>
+          <rect x="370" y="55" width="180" height="68" rx="12" fill="#fff" opacity="0.92"/>
+          <text x="390" y="83" font-size="24" font-weight="700" fill="#b627a1" font-family="Inter,sans-serif">+4000%</text>
+          <text x="390" y="103" font-size="11" fill="#888" font-family="Inter,sans-serif">упоминаний бренда</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STRIP -->
+<div class="lstrip">
+  <div style="overflow:hidden">
+    <div class="ltrack">
+      <span class="li">Western Union</span><span class="li">Shiseido</span><span class="li">Microsoft</span><span class="li">Havas Red</span><span class="li">Pernod Ricard</span><span class="li">Asana</span><span class="li">Haleon</span><span class="li">BiC</span>
+      <span class="li">Western Union</span><span class="li">Shiseido</span><span class="li">Microsoft</span><span class="li">Havas Red</span><span class="li">Pernod Ricard</span><span class="li">Asana</span><span class="li">Haleon</span><span class="li">BiC</span>
+    </div>
+  </div>
+</div>
+
+<!-- CAROUSEL / INSIGHT DRIVEN -->
+<section class="cars">
+  <div class="cari">
+    <h2 class="carh">Помогаю бизнесу принимать решения на основе данных</h2>
+    <div class="carb">
+      <div class="cart">
+        <h2>Активируем силу данных</h2>
+        <p>Широкий охват медиа, соцсетей и потребительских трендов. Но главное — не что собирается, а что с этим делается. С помощью AI превращаю данные в инсайты, на которые можно опираться.</p>
+        <h2>Делаем инсайты доступными</h2>
+        <p>Мои инструменты позволяют вашей команде стать профессионалами в аналитике. PR-менеджер, директор по маркетингу — каждый получит понятные выводы для своей стратегии.</p>
+        <h2>Переопределяем PR и маркетинговый результат</h2>
+        <p>Для измерения успеха нужна 360° отчётность с полным обзором стратегии в действии. Мои услуги дают глобальный анализ ваших усилий.</p>
+      </div>
+      <div>
+        <div class="stbox" id="stbox">
+          <div class="stf vis" id="sf0"><svg class="stg" viewBox="0 0 150 75"><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#c4f4f4" stroke-width="11" stroke-linecap="round"/><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#28bbbb" stroke-width="11" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="10"/></svg><div class="stn" style="color:#28bbbb">4000%</div><div class="stp">рост редакционных упоминаний</div></div>
+          <div class="stf" id="sf1"><svg class="stg" viewBox="0 0 150 75"><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#f0d4ec" stroke-width="11" stroke-linecap="round"/><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#b627a1" stroke-width="11" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="41"/></svg><div class="stn" style="color:#b627a1">80%</div><div class="stp">рост эффективности маркетинговых исследований</div></div>
+          <div class="stf" id="sf2"><svg class="stg" viewBox="0 0 150 75"><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#c4f4f4" stroke-width="11" stroke-linecap="round"/><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#28bbbb" stroke-width="11" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="68"/></svg><div class="stn" style="color:#28bbbb">200%</div><div class="stp">рост вовлечённости за 3 месяца</div></div>
+          <div class="stf" id="sf3"><svg class="stg" viewBox="0 0 150 75"><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#f0d4ec" stroke-width="11" stroke-linecap="round"/><path d="M10 75 A65 65 0 0 1 140 75" fill="none" stroke="#b627a1" stroke-width="11" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="30"/></svg><div class="stn" style="color:#b627a1">242%</div><div class="stp">возврат инвестиций (ROI)</div></div>
+        </div>
+        <div class="sdts" id="sdts"><div class="sdt on"></div><div class="sdt"></div><div class="sdt"></div><div class="sdt"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI DARK SECTION -->
+<section class="aisec">
+  <div class="aii">
+    <div class="aicard">
+      <div class="pbg"><div class="ppos"><div class="pcont"><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div><div class="pl"></div></div></div></div>
+      <div class="aig">
+        <div>
+          <div class="aitag">AI Аналитика</div>
+          <div class="aihed">Ваш бренд через призму искусственного интеллекта</div>
+          <p class="aidesc">Познакомьтесь с AI-аналитикой — вашим цифровым помощником, который устраняет сложность работы с данными, объясняет как тренды влияют на ваш бренд и доставляет всё: от медиабрифов до отчётов — за секунды.</p>
+          <button class="aibtn">○ ИЗУЧИТЬ</button>
+        </div>
+        <div>
+          <div class="mk">
+            <div class="mktop"><div class="mktrf"><div class="mkd r"></div><div class="mkd y"></div><div class="mkd g"></div></div><div class="mktc"><div class="mklsm"></div>Аналитика Студио</div><div style="width:60px"></div></div>
+            <div class="mkbody">
+              <div class="mksb"><div class="sbic a"></div><div class="sbic"></div><div class="sbic"></div><div class="sbic"></div><div class="sbic"></div><div class="sbic"></div></div>
+              <div class="mkcnt">
+                <div class="mkbc">← <strong>Популярные продукты</strong></div>
+                <div class="mkbr"><div class="mbsm">Новый чат</div><div class="mbsm">История</div></div>
+                <div class="cmsg"><div class="curow"><div class="cav u">А</div><div class="cnm">Анна</div></div><div class="ctx">Какие продукты в тренде в соцсетях среди разных возрастных групп?</div></div>
+                <div class="cmsg"><div class="curow"><div class="cav ai">AI</div><div class="cnm">Аналитик</div></div>
+                  <div class="cres"><div class="crt">Топ продукты по возрастным группам</div><div class="cbdg">✓ Анализ завершён</div><div class="ctabs"><div class="ctab on">Ответ</div><div class="ctab">Источники</div></div><div class="csrc"><div style="width:16px;height:16px;border-radius:3px;background:#ffeae8;font-size:8px;display:flex;align-items:center;justify-content:center">📰</div><div class="csri"><strong>РБК • Сегодня, 11:20</strong>Исследование • Москва</div></div></div>
+                </div>
+                <div class="csinp">Задайте вопрос...<div class="cssend">↑</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUITE TILES -->
+<section class="stsec">
+  <div class="sti">
+    <div class="sth"><h2>Мои услуги<br>Где умный AI встречается с экспертизой</h2><a href="#" class="stail">AI Аналитика</a></div>
+    <div class="stgrid">
+      <div class="stitem"><div class="stico"><svg viewBox="0 0 109 66" height="38" xmlns="http://www.w3.org/2000/svg"><path d="M33.75 33 L46.33 6.62" stroke="#efd4e7" stroke-width="12.5" stroke-linecap="round" fill="none"/><path d="M19.84 33 L6.25 59.38" stroke="#c8e9ec" stroke-width="12.5" stroke-linecap="round" fill="none"/><path d="M47.24 33 L33.87 59.31" stroke="#26bcbb" stroke-width="12.5" stroke-linecap="round" fill="none"/><circle cx="33.63" cy="6.49" r="6.24" fill="#26bcbb"/><path d="M60.85 33 L47.49 59.31" stroke="#ae3794" stroke-width="12.5" stroke-linecap="round" fill="none"/><circle cx="86.36" cy="59.31" r="6.24" fill="#ae3794"/></svg></div><h3>Мониторинг медиа</h3><p>Отслеживаю ваш бренд</p><div class="stlrn">Подробнее</div></div>
+      <div class="stitem"><div class="stico"><svg viewBox="0 0 48 38" height="38" xmlns="http://www.w3.org/2000/svg"><path d="M43.36 4 L43.4 29.95" stroke="#26bcbb" stroke-width="7.2" stroke-linecap="round" fill="none"/><circle cx="43.36" cy="34.17" r="3.61" fill="#c8e9ec"/><path d="M26.98 28 Q35.96 28 35.96 18 Q35.96 8 26.98 8 L24.07 8" stroke="#efd4e7" stroke-width="7.2" stroke-linecap="round" fill="none"/><circle cx="21.52" cy="34.41" r="3.54" fill="#efd4e7"/><path d="M13.42 28 Q4.44 28 4.44 18 Q4.44 8 13.42 8 L15.89 8" stroke="#ae3794" stroke-width="7.2" stroke-linecap="round" fill="none"/><circle cx="22.4" cy="0.44" r="3.61" fill="#ae3794"/></svg></div><h3>Соцсети и аналитика</h3><p>Изучаю инсайты и тренды</p><div class="stlrn">Подробнее</div></div>
+      <div class="stitem"><div class="stico" style="font-size:30px">🤖</div><h3>AI-видимость бренда</h3><p>Узнайте как ИИ видит вас</p><div class="stlrn">Подробнее</div></div>
+      <div class="stitem"><div class="stico"><svg viewBox="0 0 140 66" height="38" xmlns="http://www.w3.org/2000/svg"><path d="M46.5 33 L33 59.31" stroke="#ae3794" stroke-width="12.5" stroke-linecap="round" fill="none"/><circle cx="46.64" cy="6.34" r="6.24" fill="#ae3794"/><path d="M60 33 L73.36 59.31" stroke="#f26329" stroke-width="12.5" stroke-linecap="round" fill="none"/><circle cx="79.36" cy="59.31" r="6.24" fill="#f26329"/><path d="M117.47 6.5 L117.47 45.83" stroke="#26bcbb" stroke-width="13" stroke-linecap="round" fill="none"/><circle cx="125.17" cy="39" r="6.7" fill="#26bcbb"/></svg></div><h3>Медиарилейшнз</h3><p>Выхожу на ключевых журналистов</p><div class="stlrn">Подробнее</div></div>
+      <div class="stitem"><div class="stico"><svg viewBox="0 0 83 67" height="38" xmlns="http://www.w3.org/2000/svg"><path d="M75.47 19.06 L75.47 58.84" stroke="#26bcbb" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M11.05 49.12 Q20.24 49.12 20.24 38.94 Q20.24 28.77 11.05 28.77" stroke="#f26329" stroke-width="13" stroke-linecap="round" fill="none"/><circle cx="58.79" cy="38.54" r="6.49" fill="#f26329"/><circle cx="75.47" cy="18.82" r="6.74" fill="#26bcbb"/></svg></div><h3>Потребительская аналитика</h3><p>Понимаю вашу аудиторию</p><div class="stlrn">Подробнее</div></div>
+      <div class="stitem"><div class="stico" style="font-size:30px">⭐</div><h3>Инфлюенс-маркетинг</h3><p>Расширяю ваш охват</p><div class="stlrn">Подробнее</div></div>
+      <div class="stitem"><div class="stico" style="font-size:30px">💼</div><h3>Бизнес-разведка</h3><p>Увеличиваю продажи</p><div class="stlrn">Подробнее</div></div>
+      <div class="stitem"><div class="stico" style="font-size:30px">🔗</div><h3>Интеграция данных</h3><p>Связываю ваши данные</p><div class="stlrn">Подробнее</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="tsec" id="tsec">
+  <div class="ti">
+    <div class="tinfo">
+      <h2>Клиенты<br>говорят лучше всего</h2>
+      <p>Помогаю бизнесу более 5 лет и мне всё ещё интересно. Компании разного масштаба доверяют мне, чтобы получить конкурентное преимущество и добиться успеха.</p>
+      <a href="https://profi.ru" target="_blank" class="tcta"><span class="tctac">→</span>Все отзывы на Профи.ру</a>
+    </div>
+    <div class="tcols">
+      <div class="tcol"><div class="tcoli">
+        <div class="tcard"><div class="tclogo"><span>RetailGroup</span></div><p>Наша ключевая цель — чтобы данные о потребителях двигали каждое бизнес-решение. МедиаПро стал одним из ключевых инструментов, который помог нам стать по-настоящему клиентоцентричной организацией.</p><div class="tcauth"><strong>Елена Смирнова</strong>Директор по потребительской аналитике</div></div>
+        <div class="tbl" style="background:#b627a1"><span>★ 5.0 Профи.ру</span></div>
+        <div class="tcard"><div class="tclogo"><span>MediaAgency</span></div><p>МедиаПро помог нам стать более стратегическими и менее реактивными в работе с публикациями. Теперь мы видим медиапейзаж целиком и понимаем свою позицию на рынке.</p><div class="tcauth"><strong>Михаил Иванов</strong>Руководитель PR-отдела</div></div>
+        <div class="tbl" style="background:#ffcc01"><span style="color:#000">150+ заказов</span></div>
+        <div class="tcard"><div class="tclogo"><span>TechBrand</span></div><p>Сильная целостность данных, отличный доступ и интуитивный инструмент. Не думаю, что какой-либо другой специалист обладает такой же гибкостью в анализе данных.</p><div class="tcauth"><strong>Дмитрий Козлов</strong>Руководитель Social Intelligence</div></div>
+        <div class="tbl" style="background:#b627a1"><span>★ 5.0 Профи.ру</span></div>
+        <div class="tcard"><div class="tclogo"><span>RetailGroup</span></div><p>Наша ключевая цель — чтобы данные о потребителях двигали каждое бизнес-решение. МедиаПро стал одним из ключевых инструментов, который помог нам стать по-настоящему клиентоцентричной организацией.</p><div class="tcauth"><strong>Елена Смирнова</strong>Директор по потребительской аналитике</div></div>
+      </div></div>
+      <div class="tcol"><div class="tcoli">
+        <div class="tcard"><div class="tclogo"><span>FMCG Corp</span></div><p>МедиаПро позволяет моей команде понять, какие темы сейчас движут вовлечённостью и кто в нашей целевой аудитории ведёт связанные разговоры. Это руководит нашей стратегией.</p><div class="tcauth"><strong>Ольга Петрова</strong>Ведущий аналитик данных</div></div>
+        <div class="tcard"><div class="tclogo"><span>FinancePro</span></div><p>МедиаПро помогает нам понять не только результаты, но и влияние наших сообщений, насколько они соответствуют нашим бизнес-приоритетам.</p><div class="tcauth"><strong>Сергей Новиков</strong>Руководитель медиааналитики</div></div>
+        <div class="tbl" style="background:#28bbbb"><span>98% довольных</span></div>
+        <div class="tcard"><div class="tclogo"><span>PRStudio</span></div><p>Использование МедиаПро позволило нам показать руководству ценность PR. Наличие качественных данных для подтверждения ценности наших коммуникаций было действительно полезным.</p><div class="tcauth"><strong>Анна Кузнецова</strong>Senior Manager Communications</div></div>
+        <div class="tbl" style="background:#ff6221"><span>5 лет опыта</span></div>
+        <div class="tcard"><div class="tclogo"><span>FMCG Corp</span></div><p>МедиаПро позволяет моей команде понять, какие темы сейчас движут вовлечённостью и кто в нашей целевой аудитории ведёт связанные разговоры. Это руководит нашей стратегией.</p><div class="tcauth"><strong>Ольга Петрова</strong>Ведущий аналитик данных</div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT CTA -->
+<section class="pcsec" id="contact">
+  <div class="pci">
+    <div class="lpvis">
+      <svg viewBox="0 0 460 320" style="width:100%;max-width:460px" xmlns="http://www.w3.org/2000/svg">
+        <rect x="36" y="16" width="388" height="244" rx="12" fill="#1c1c1c"/>
+        <rect x="50" y="30" width="360" height="216" rx="6" fill="#111"/>
+        <rect x="58" y="38" width="344" height="200" rx="4" fill="#1a1a2e"/>
+        <rect x="68" y="48" width="56" height="7" rx="3" fill="#28bbbb" opacity="0.8"/>
+        <rect x="68" y="62" width="90" height="5" rx="2" fill="#333"/><rect x="68" y="73" width="70" height="5" rx="2" fill="#2a2a2a"/>
+        <rect x="68" y="100" width="22" height="60" rx="2" fill="#28bbbb" opacity="0.35"/>
+        <rect x="96" y="86" width="22" height="74" rx="2" fill="#28bbbb" opacity="0.55"/>
+        <rect x="124" y="76" width="22" height="84" rx="2" fill="#28bbbb" opacity="0.75"/>
+        <rect x="152" y="64" width="22" height="96" rx="2" fill="#28bbbb" opacity="0.95"/>
+        <rect x="180" y="96" width="22" height="64" rx="2" fill="#b627a1" opacity="0.55"/>
+        <rect x="208" y="78" width="22" height="82" rx="2" fill="#b627a1" opacity="0.75"/>
+        <polyline points="68,135 116,112 164,90 212,72 260,64 308,56 356,46 404,38" fill="none" stroke="#28bbbb" stroke-width="1.8" opacity="0.6"/>
+        <rect x="248" y="82" width="148" height="66" rx="8" fill="#232338"/>
+        <text x="260" y="103" font-size="10" fill="#888" font-family="Inter,sans-serif">Упоминания бренда</text>
+        <text x="260" y="122" font-size="20" font-weight="700" fill="#28bbbb" font-family="Inter,sans-serif">+4000%</text>
+        <text x="260" y="140" font-size="9" fill="#555" font-family="Inter,sans-serif">за последние 30 дней</text>
+        <rect x="0" y="262" width="460" height="18" rx="0" fill="#2a2a2a"/>
+        <rect x="130" y="262" width="200" height="5" rx="2.5" fill="#222"/>
+        <rect x="150" y="272" width="160" height="8" rx="4" fill="#1e1e1e"/>
+        <ellipse cx="230" cy="282" rx="220" ry="8" fill="#ddd" opacity="0.2"/>
+      </svg>
+    </div>
+    <div class="pcinfo">
+      <h2>Уберите догадки<br>из вашей стратегии.</h2>
+      <p>Закажите анализ медиапространства и начните получать инсайты, которых вам не хватает. Работаю быстро, чётко, с выводами которые реально работают.</p>
+      <div class="btnrow">
+        <a href="https://profi.ru" target="_blank" class="bdark"><span class="bdc">→</span>заказать на профи.ру</a>
+        <a href="#pricing" class="bsec">посмотреть тарифы →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT META -->
+<section class="absec">
+  <div class="abi">
+    <h2 class="abh2">Что делает МедиаПро — МедиаПро?</h2>
+    <div class="abgrid">
+      <div class="abcard"><div class="abvis" style="background:linear-gradient(135deg,#e8fdf5,#c4f4f4)">🎯</div><div class="abinfo"><h3>Кто я</h3><h4>Опыт и Подход</h4></div><div class="abarr">↗</div></div>
+      <div class="abcard"><div class="abvis" style="background:linear-gradient(135deg,#fdf4ff,#f0d4ec)">🤝</div><div class="abinfo"><h3>Сообщество клиентов</h3><h4>Связь с коллегами</h4></div><div class="abarr">↗</div></div>
+      <div class="abcard"><div class="abvis" style="background:linear-gradient(135deg,#fff8e8,#ffecc4)">🚀</div><div class="abinfo"><h3>Обновления услуг</h3><h4>Новые возможности</h4></div><div class="abarr">↗</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ftr">
+  <div class="ftri">
+    <div class="ftrgrid">
+      <div class="fcol"><h3>Функции услуг</h3><a href="#">Мониторинг медиа</a><a href="#">Мониторинг соцсетей</a><a href="#">Потребительские инсайты</a><a href="#">Пресс-релизы</a><a href="#">Оповещения в реальном времени</a><a href="#">Аналитика соцсетей</a><a href="#">PR-отчётность</a><a href="#">Рассылки и ньюсфиды</a><a href="#">База медиаконтактов</a><a href="#">Управление инфлюенсерами</a></div>
+      <div class="fcol"><h3>Мои услуги</h3><a href="#">Медиааналитика</a><a href="#">Медиарилейшнз</a><a href="#">Соцсети и аналитика</a><a href="#">Потребительская аналитика</a><a href="#">Инфлюенс-маркетинг</a><a href="#">Бизнес-разведка</a><a href="#">API и Интеграция</a><a href="#">AI Аналитика</a><div class="fsp"></div><h3>Контакты</h3><a href="#">Связаться со мной</a><a href="#pricing">Тарифы</a><a href="https://profi.ru" target="_blank">Заказать консультацию</a></div>
+      <div class="fcol"><h3>Ресурсы</h3><a href="#">Кейсы клиентов</a><a href="#">Блог</a><a href="#">Гайды и Отчёты</a><a href="#">Вебинары</a><a href="#">Мероприятия</a><a href="#">Обновления</a><div class="fsp"></div><h3>Соцсети</h3><a href="#">LinkedIn</a><a href="#">Telegram</a><a href="#">ВКонтакте</a><a href="#">YouTube</a><a href="#">TikTok</a></div>
+      <div class="fcol"><h3>О специалисте</h3><a href="#">Обо мне</a><a href="#">Профи.ру</a><a href="#">Отзывы</a><a href="#">Партнёрская программа</a><div class="fsp"></div><div class="flogo">МедиаПро</div><div class="fcpy">© МедиаПро. Все права защищены.</div></div>
+    </div>
+    <div class="fbot">
+      <div><a href="#">Политика конфиденциальности</a><a href="#">Правовая информация</a><a href="#">Карта сайта</a><a href="#">Мобильные приложения</a></div>
+      <div class="fsoc"><div class="fsc">П</div><div class="fsc">✈</div><div class="fsc">in</div><div class="fsc">VK</div><div class="fsc">▶</div></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Word swap
+const words=['бренда','конкурентов','аудитории','рынка'];let wi=0;const hw=document.getElementById('hw');
+if(hw)setInterval(()=>{wi=(wi+1)%words.length;hw.style.cssText='opacity:0;filter:blur(4px);transition:opacity .3s,filter .3s;display:inline-block;color:#28bbbb';setTimeout(()=>{hw.textContent=words[wi];hw.style.cssText='opacity:1;filter:blur(0);transition:opacity .35s,filter .35s;display:inline-block;color:#28bbbb'},300)},2500);
+
+// Stat carousel
+const figs=[0,1,2,3].map(i=>document.getElementById('sf'+i));
+const sdts=document.querySelectorAll('.sdt');
+let si=0;
+function showSt(n){figs.forEach((f,i)=>{if(!f)return;f.classList.toggle('vis',i===n);if(i!==n){f.style.position='absolute';f.style.inset='0'}else{f.style.position='relative';f.style.inset='unset'}});sdts.forEach((s,i)=>s.classList.toggle('on',i===n));si=n}
+figs.forEach((f,i)=>{if(f&&i!==0){f.style.position='absolute';f.style.inset='0'}});
+sdts.forEach((s,i)=>s.addEventListener('click',()=>showSt(i)));
+setInterval(()=>showSt((si+1)%4),3400);
+
+// Page dots
+const pds=document.querySelectorAll('.pd');let pdi=3;
+setInterval(()=>{pds[pdi]?.classList.remove('on');pdi=(pdi+1)%pds.length;pds[pdi]?.classList.add('on')},2000);
+</script>
+</body>
+</html>
